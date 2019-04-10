@@ -3,10 +3,11 @@ import { AdvertPage } from './../advert/advert';
 import { NewToTheAppPage } from './../new-to-the-app/new-to-the-app';
 import { OpenWalletAccountPage } from './../open-wallet-account/open-wallet-account';
 import { ApiProvider } from './../../providers/api/api';
-import { Component, NgZone,ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Events, NavController, NavParams, ViewController, ModalController,AlertController } from 'ionic-angular';
+import { Events, NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 import { ForgotPinPage } from './../forgot-pin/forgot-pin';
+
 declare var cordova: any;
 
 /**
@@ -23,14 +24,7 @@ declare var cordova: any;
 export class Authenticate {
 
   login: string;
-  pass: any;
-
-  p1:string='';
-  p2:string='';
-  p3:string='';
-  p4:string='';
-  p5:string='';
-  p6:string='';
+  pass: string;
 
   authenticating = false;
 
@@ -45,8 +39,17 @@ export class Authenticate {
 
   test: boolean = true;
   cunt = 1;
-
+  idleState: string = 'not start';
   fetching: boolean = false;
+
+
+  p1:string='';
+  p2:string='';
+  p3:string='';
+  p4:string='';
+  p5:string='';
+  p6:string='';
+
   textClass_:string;
 
   @ViewChild('pass1') pass1:any;
@@ -63,24 +66,23 @@ export class Authenticate {
    p5Color:any;
    p6Color:any;
 
-  constructor(private zone: NgZone, public storage: Storage, public events: Events, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController, public api: ApiProvider, public userProvider: UserProvider,public alertCtrl: AlertController) {
+  constructor(private zone: NgZone, public storage: Storage, public events: Events, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController, public api: ApiProvider, public userProvider: UserProvider, public alertCtrl: AlertController) {
     this.test = api.isTest;
     storage.get('user_login').then(userStr => {
       if (userStr !== null) {
         this.user = JSON.parse(userStr);
       }
     });
-  //  this.getSplashImg();
+    //  this.getSplashImg();
   }
 
   ionViewDidLoad() {
     let advert = this.modalCtrl.create(AdvertPage);
     advert.present();
-
+  
     setTimeout(() => {
       this.vis = true;
     }, 1200);
-    console.log(this.pass1);
   }
 
   eventHandler($event) {
@@ -104,100 +106,156 @@ export class Authenticate {
   }
 
   pinChange() {
+    // console.log("key : "+e);
+    // console.log("keycode  :"+e.keyCode);
     if (this.pass.length === 6) {
       this.authenticateUser();
     }
   }
+
+  pinChange_() {
+    if (this.pass.length === 6) {
+      this.authenticate();
+    }
+  }
+
   onKeyUp(e,t){
    switch (t) {
       case 1:
         this.p1Color="textClassChange";
         this.pass2.setFocus();
         this.pass += this.p1;
-        console.log(this.pass);
+
+        if(e.keyCode===8)
+        {
+          this.p1Color="textClass";
+          if(this.pass.length>0)
+          {
+            this.pass ='';
+          }
+        }
         break;
       case 2:
         this.p2Color="textClassChange";
         this.pass3.setFocus();
         this.pass += this.p2;
-        console.log(this.pass);
+        if(e.keyCode===8)
+        {
+          this.p2Color="textClass";
+          this.pass1.setFocus();
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
         break;
       case 3:
         this.p3Color="textClassChange";
         this.pass4.setFocus();
         this.pass += this.p3;
-        console.log(this.pass);
+        if(e.keyCode===8)
+        {
+          this.p3Color="textClass";
+          this.pass2.setFocus();
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
         break;
       case 4:
         this.p4Color="textClassChange";
         this.pass5.setFocus();
         this.pass += this.p4;
-        console.log(this.pass);
+        if(e.keyCode===8)
+        {
+          this.p4Color="textClass";
+          this.pass3.setFocus();
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
         break;
       case 5:
         this.p5Color="textClassChange";
         this.pass6.setFocus();
         this.pass += this.p5;
-        console.log(this.pass);
+        if(e.keyCode===8)
+        {
+          this.p5Color="textClass";
+          this.pass4.setFocus();
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
         break;
       case 6:
         this.p6Color="textClassChange";
         this.pass += this.p6;
-        console.log(this.pass);
-        this.authenticate();
+        if(e.keyCode===8)
+        {
+          this.p6Color="textClass";
+          this.pass5.setFocus();
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
+        else{
+          this.authenticate();
+        }
         break;
     }
 
   }
-  pinChange_() {
-  }
 
   authenticate() {
     this.authenticating = true;
-        this.p1Color="textClass";
 
-        this.p2Color="textClass";
+  this.p1Color="textClass";
+  this.p2Color="textClass";
+  this.p3Color="textClass";
+  this.p4Color="textClass";
+  this.p5Color="textClass";
+  this.p6Color="textClass";
 
-        this.p3Color="textClass";
-
-        this.p4Color="textClass";
-
-        this.p5Color="textClass";
-
-        this.p6Color="textClass";
-        console.log(parseInt(this.pass));
-    let data = JSON.stringify({ pass: btoa(this.pass), "login": this.login });
+    let data = JSON.stringify({ "pass": btoa(this.pass), "login": this.login, 'method': 'login' });
     console.log(data);
     console.log(this.key);
-    cordova.plugins.aesEnc(data, this.key).then((data_) => {
-      this.api.query(data_, null, 'login', false).then(data__ => {
+  //  this.api.getImei().then(imei => {
+  //    console.log(imei)
+      cordova.plugins.aesEnc(data, this.key).then((data_) => {
+        this.api.query(data_, null, 'login', false).then(data__ => {
+          this.authenticating = false;
+          let dt: any = data__;
+          if (dt.kbankResponse.retcode === 0) {
+            cordova.plugins.aesDec(dt.kbankResponse.reply, this.key).then((data___) => {
+
+              let coge: any = JSON.parse(data___);
+
+              coge.signedIn = true;
+
+              this.events.publish('user:auth', coge, Date.now());
+
+              this.navCtrl.popToRoot();
+            }).catch((err) => {
+              this.ret = 'Unknown error!';
+            });
+          } else {
+            this.ret = dt.kbankResponse.reply;
+          }
+
+        }).catch(error => {
+          this.authenticating = false;
+          this.ret = 'An error occurred!';
+        });
+      }).catch((err) => {
         this.authenticating = false;
-        let dt: any = data__;
-        if (dt.kbankResponse.retcode === 0) {
-          cordova.plugins.aesDec(dt.kbankResponse.reply, this.key).then((data___) => {
-
-            let coge: any = JSON.parse(data___);
-
-            coge.signedIn = true;
-
-            this.events.publish('user:auth', coge, Date.now());
-
-            this.navCtrl.popToRoot();
-          }).catch((err) => {
-            this.ret = 'Unknown error!';
-          });
-        } else {
-          this.ret = dt.kbankResponse.reply;
-        }
-
-      }).catch(error => {
-        this.authenticating = false;
-        this.ret = 'An error occurred!';
-      });
-    }).catch((err) => {
-      this.authenticating = false;
-      this.ret = 'Unknown error!';
-    });
+        this.ret = 'Unknown error!';
+    //  });
+  })
   }
 
   showRegister() {
@@ -213,8 +271,7 @@ export class Authenticate {
   register() {
     this.navCtrl.push(NewToTheAppPage);
   }
-  forgotPin()
-  {
+  forgotPin() {
     this.navCtrl.push(ForgotPinPage);
   }
 }
