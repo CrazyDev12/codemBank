@@ -23,10 +23,10 @@
         <div *ngIf="user === null">
           <ion-input *ngIf="!authenticating" placeholder="Phone..." type="tel"
             clearInput [(ngModel)]="login"></ion-input>
-          <!-- <ion-input *ngIf="!authenticating" placeholder="PIN..." type="tel"
+          <ion-input *ngIf="!authenticating" placeholder="PIN..." type="tel"
             class="input-pin" clearInput [(ngModel)]="pass"
-            (ngModelChange)="pinChange_()"></ion-input> -->
-            <ion-grid>
+            (ngModelChange)="pinChange_()"></ion-input>
+           <!--  <ion-grid>
             <ion-row>
               <ion-col col-2>
                 <ion-input *ngIf="!authenticating" type="tel" class="input-pin textClass" clearInput #pass1 maxlength="1" [(ngModel)]="p1" (keyup)="onKeyUp($event,1)"  [(ngClass)]="p1Color"></ion-input>
@@ -52,7 +52,7 @@
                   class="input-pin textClass" clearInput #pass6 maxlength="1" [(ngModel)]="p6" (keyup)="onKeyUp($event,6)"  [(ngClass)]="p6Color"></ion-input>
               </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid> -->
         </div>
 
         <div *ngIf="user !== null">
