@@ -122,10 +122,6 @@ export class Authenticate {
   onKeyUp(e,t){
    switch (t) {
       case 1:
-        this.p1Color="textClassChange";
-        this.pass2.setFocus();
-        this.pass += this.p1;
-
         if(e.keyCode===8)
         {
           this.p1Color="textClass";
@@ -134,76 +130,98 @@ export class Authenticate {
             this.pass ='';
           }
         }
+        else{
+          this.p1Color="textClassChange";
+          this.pass2.setFocus();
+          this.pass += this.p1;
+        }
         break;
       case 2:
-        this.p2Color="textClassChange";
-        this.pass3.setFocus();
-        this.pass += this.p2;
+        
         if(e.keyCode===8)
         {
-          this.p2Color="textClass";
+          this.p1Color="textClass";
           this.pass1.setFocus();
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        break;
-      case 3:
-        this.p3Color="textClassChange";
-        this.pass4.setFocus();
-        this.pass += this.p3;
-        if(e.keyCode===8)
-        {
-          this.p3Color="textClass";
-          this.pass2.setFocus();
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        break;
-      case 4:
-        this.p4Color="textClassChange";
-        this.pass5.setFocus();
-        this.pass += this.p4;
-        if(e.keyCode===8)
-        {
-          this.p4Color="textClass";
-          this.pass3.setFocus();
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        break;
-      case 5:
-        this.p5Color="textClassChange";
-        this.pass6.setFocus();
-        this.pass += this.p5;
-        if(e.keyCode===8)
-        {
-          this.p5Color="textClass";
-          this.pass4.setFocus();
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        break;
-      case 6:
-        this.p6Color="textClassChange";
-        this.pass += this.p6;
-        if(e.keyCode===8)
-        {
-          this.p6Color="textClass";
-          this.pass5.setFocus();
+          this.p1='';
           if(this.pass.length>0)
           {
             this.pass =this.pass.slice(0,-1);
           }
         }
         else{
+          this.p2Color="textClassChange";
+          this.pass3.setFocus();
+          this.pass += this.p2;
+        }
+        break;
+      case 3:
+        if(e.keyCode===8)
+        {
+          this.p2Color="textClass";
+          this.pass2.setFocus();
+          this.p2='';
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
+        else{
+          this.p3Color="textClassChange";
+          this.pass4.setFocus();
+          this.pass += this.p3;
+        }
+        break;
+      case 4:
+        
+        if(e.keyCode===8)
+        {
+          this.p3Color="textClass";
+          this.pass3.setFocus();
+          this.p3='';
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
+        else{
+          this.p4Color="textClassChange";
+          this.pass5.setFocus();
+          this.pass += this.p4;
+        }
+        break;
+      case 5:
+        
+        if(e.keyCode===8)
+        {
+          this.p4Color="textClass";
+          this.pass4.setFocus();
+          this.p4='';
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
+        else{
+          this.p5Color="textClassChange";
+          this.pass6.setFocus();
+          this.pass += this.p5;
+        }
+        break;
+      case 6:
+        
+        if(e.keyCode===8)
+        {
+          this.p5Color="textClass";
+          this.pass5.setFocus();
+          this.p5='';
+          if(this.pass.length>0)
+          {
+            this.pass =this.pass.slice(0,-1);
+          }
+        }
+        else{
+          this.p6Color="textClassChange";
+          this.pass += this.p6;
           this.authenticate();
         }
         break;
