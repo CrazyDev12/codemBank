@@ -42,7 +42,7 @@ export class MoveMoneyServicePage {
   user: any;
   test: boolean = true;
 
-  contactList =[];
+  // contactList =[];
 
   sourceAccount: any = { account: '' };
   destinationAccount: any = { account: '' };
@@ -83,19 +83,19 @@ export class MoveMoneyServicePage {
       this.beneficial.benphone = this.user.phone;
     }
 
-      this.contacts.find(
-        ["displayName", "phoneNumbers","photos"],
-        {multiple: true, hasPhoneNumber: true}
-        ).then((contacts) => {
-          for (var i=0 ; i < contacts.length; i++){
-            if(contacts[i].displayName !== null) {
-              var contact = {};
-              contact["name"]   = contacts[i].displayName;
-              contact["number"] = contacts[i].phoneNumbers[0].value;
-              this.contactList.push(contact);
-            }
-          }
-      });
+      // this.contacts.find(
+      //   ["displayName", "phoneNumbers","photos"],
+      //   {multiple: true, hasPhoneNumber: true}
+      //   ).then((contacts) => {
+      //     for (var i=0 ; i < contacts.length; i++){
+      //       if(contacts[i].displayName !== null) {
+      //         var contact = {};
+      //         contact["name"]   = contacts[i].displayName;
+      //         contact["number"] = contacts[i].phoneNumbers[0].value;
+      //         this.contactList.push(contact);
+      //       }
+      //     }
+      // });
   }
 
   fetchBens() {
