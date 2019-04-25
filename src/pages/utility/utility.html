@@ -27,7 +27,7 @@
     </ion-item>
 
     <ion-item *ngIf="util.sendown === 'Y' || util.saveben === 'Y'">
-      <ion-select interface="popover" [(ngModel)]="numberType" (ngModelChange)="typeChange($event)">
+      <ion-select interface="popover" [(ngModel)]="numberType" (ngModelChange)="typeChange($event)" class="full-width">
         <ion-option value="own" *ngIf="util.sendown === 'Y'">Own Number</ion-option>
         <ion-option value="ben" *ngIf="util.saveben === 'Y'">Select Beneficiary</ion-option>
         <ion-option value="other">Other {{util.fieldname}}</ion-option>
