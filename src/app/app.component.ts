@@ -8,13 +8,13 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { AlertController, App, Events, Platform, Tabs } from 'ionic-angular';
+import { AlertController, App, Events, Platform, Tabs, Keyboard } from 'ionic-angular';
 
 import { Authenticate } from '../pages/authenticate/authenticate';
 import { ChangePassword } from './../pages/change-password/change-password';
 import { Client } from './../pages/client/client';
 import { UserProvider } from './../providers/user/user';
- import {Idle} from '@ng-idle/core';
+ // import {Idle} from '@ng-idle/core';
 
 declare var cordova: any;
 
@@ -61,10 +61,11 @@ export class MyApp {
     public alertCtrl: AlertController,
     public storage: Storage,
     public userProvider: UserProvider,
-    private idle: Idle, 
+    // private idle: Idle, 
+    private keyboard:Keyboard,
     public api: ApiProvider) {
-      this.idle.onIdleStart.subscribe(() => this.idleState = 'You\'ve gone idle!');
-      this.idle.setIdle(3);
+      // this.idle.onIdleStart.subscribe(() => this.idleState = 'You\'ve gone idle!');
+      // this.idle.setIdle(3);
     try {
       api.setTest(this.isTest);
     } catch (exce) { }
@@ -90,13 +91,29 @@ export class MyApp {
       ]
     });
 
+    // set interval for checking session of user.
+    let sesstime=1500;
+    this.storage.get('sesstime').then((val) => {
+      console.log("session value "+val);
+      if(val!==null)
+      {
+        sesstime=val;
+      }
+    });
+    
+    setInterval(()=>{
+      this.chk();
+      this.storage.get('sesstime').then((val) => {sesstime=val;});
+        console.log("value session "+sesstime);
+    },sesstime);
+
     platform.ready().then(() => {
       api.setTest(this.isTest);
      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-
+    
       screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
       appVersion.getAppName().then(name => {
@@ -177,16 +194,16 @@ export class MyApp {
         this.pushInit();
       }, 1000);
 
-      this.platform.pause.subscribe((result) => {
-        this.events.publish('user:auth', null, Date.now());
-           console.log('[INFO] App paused');
-          this.storage.forEach((value, key, index) => {
-            if (key !== 'registrationId') {
-              this.storage.remove(key);
-            }
-          });
+      // this.platform.pause.subscribe((result) => {
+      //   this.events.publish('user:auth', null, Date.now());
+      //      console.log('[INFO] App paused');
+      //     this.storage.forEach((value, key, index) => {
+      //       if (key !== 'registrationId') {
+      //         this.storage.remove(key);
+      //       }
+      //     });
 
-      });
+      // });
     });
 
     platform.resume.subscribe(() => {

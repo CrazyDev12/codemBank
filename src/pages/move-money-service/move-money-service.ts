@@ -46,7 +46,7 @@ export class MoveMoneyServicePage {
 
   sourceAccount: any = { account: '' };
   destinationAccount: any = { account: '' };
-  amount = ''
+  amount:number;
   currency: any = { isocode: '' };
   description = '';
   secretquestion = '';
@@ -379,7 +379,7 @@ export class MoveMoneyServicePage {
     this.successModal.onDidDismiss(data => {
       this.sourceAccount = { account: '' };
       this.destinationAccount = { account: '' };
-      this.amount = ''
+      this.amount = 0;
       this.currency = { isocode: '' };
       this.description = '';
       this.beneficial = { name: '', benphone: '', email: '' };

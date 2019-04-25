@@ -1,12 +1,27 @@
 page-authenticate {
+    .textClass{
+      min-width: 25px !important;
+      max-width: 25px !important;
+      width: 25px;
+      height: 25px !important;
+      color: #937001 !important;
+      border: 2px solid;
+      border-radius: 50%;
+    }
+    .textClassChange{
+      min-width: 25px !important;
+      max-width: 25px !important;
+      width: 25px;
+      height: 25px !important;
+      color: #937001 !important;
+      border: 2px solid;
+      border-radius: 50%;
+      background-color:#937001 !important;
+    }
   ion-toolbar {
     height: 56px;
   }
-  * {
-    overflow: hidden !important;
-  }
   ion-content {
-    overflow: hidden !important;
     #wrapping {
       display: block !important;
       width: 100vw !important;
@@ -21,7 +36,6 @@ page-authenticate {
         bottom: 0;
         margin-top: auto;
         margin-bottom: auto;
-        overflow: hidden !important;
         #main-logo {
           height: 296px !important;
           margin-top: -80px !important;
@@ -33,27 +47,38 @@ page-authenticate {
           }
         }
         .textClass{
-          min-width: 25px !important;
-          max-width: 25px !important;
-          width: 25px !important;
-          height: 32px !important;
-          color:#937001 !important;
-          background-color:#937001 !important;
-        }
-        .textClassChange{
-          min-width: 25px !important;
-          max-width: 25px !important;
-          width: 25px !important;
-          height: 32px !important;
-          color:#393737 !important;
-          background-color:#393737 !important;
-        }
+            min-width: 25px !important;
+            max-width: 25px !important;
+            width: 25px;
+            height: 25px !important;
+            color: #937001 !important;
+            border: 2px solid;
+            border-radius: 50%;
+          }
+          .textClassChange{
+            min-width: 25px !important;
+            max-width: 25px !important;
+            width: 25px;
+            height: 25px !important;
+            color: #937001 !important;
+            border: 2px solid;
+            border-radius: 50%;
+            background-color:#937001 !important;
+          }
 
         div .fgt-btn{
-          margin:15px !important;
+          margin:20px 0px !important;
           text-align:center !important;
-          font-family: 'BrandFont' !important;
-          font-size: 15px !important;
+          background-image: url('../assets/img/forgot.png');
+          background-position: center;
+          display: block;
+          width: 100%;
+          height: 40px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          position: absolute;
+          //font-family: 'BrandFont' !important;
+          //font-size: 15px !important;
         }
         .small-buttons-a,
         .small-buttons-b {
@@ -63,7 +88,6 @@ page-authenticate {
           background-repeat: no-repeat;
           background-size: contain;
           position: absolute;
-          bottom: 0px;
         }
         .small-buttons-a {
           background-image: url('../assets/img/activate.png');
@@ -95,7 +119,7 @@ page-authenticate {
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center;
-          margin-bottom: 24px;
+          margin-bottom: 15px;
         }
         .no-bg-color,
         .no-bg-color * {

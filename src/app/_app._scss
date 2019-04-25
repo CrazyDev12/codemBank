@@ -17,96 +17,69 @@
   src: url('../assets/font/expressa.ttf');
 }
 .input-rounded{
-  border: none ;
-  -moz-border-radius: 0px !important;
-  -webkit-border-radius: 0px !important;
-  border-radius: 0px !important;
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
+  border: 2px solid #ddd !important;
+  -moz-border-radius: 18px !important;
+  -webkit-border-radius: 18px !important;
+  border-radius: 18px !important;
+  -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
   outline: 0 !important;
   background-color: white;
   -webkit-appearance: none !important;
-  // margin:4px;
-  // position : initial !important;
   padding: 0px 10px;
 }
+
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.input-has-focus:last-child {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.input-has-focus:last-child .item-inner {
+    box-shadow: none;
+  }
+
+  .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
+    box-shadow: none;
+  }
+
+  .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+  }
 .full-width{
   min-width:97%;
   max-width:100%;
   padding: 13px 15px;
 }
-ion-input:focus{
-  border-color:color($colors, primary)!important;
-  box-shadow: none!important; 
-}
-.item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
-      border-bottom-color: transparent!important;
-    box-shadow: none!important; 
-}
-// .list-md .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child{
-//   border-bottom-color: transparent!important;
-// }
 .item-input-has-focus{
   ion-input,ion-select{
-    border-color:transparent!important;
+    border-color:color($colors, primary) !important;
+    outline-offset: 0px !important;
+    outline: none !important;
   }
 }
 
-.item.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-  border-bottom-color: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child, .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child
- {
-  border-bottom-color: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.list-md .item-block .item-inner {
-     border-bottom: 1px solid transparent;
-  }
-  .list-md .item-input:last-child{
-    border-bottom: 1px solid transparent;
-  }
-  .list-md  .item-block:last-child .item-inner{
-    border-bottom: 1px solid transparent;
-  }
-  .item-input-has-focus{
-    ion-input{
-      border-color:transparent !important;
-      outline-offset: 0px !important;
-      outline: none !important;
-    }
-  }
-  //25th april css
-  .item-md.item-block .item-inner{
-    padding: 0px;
-  }
-  .item-md.item-block{
-    padding: 0px;
-    //margin-bottom: 14px!important;
-  //  border: 2px solid #fff ;
-    -moz-border-radius: 18px !important;
-    -webkit-border-radius: 18px !important;
-    border-radius: 18px !important;
-    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2) !important;
-    outline: 0 !important;
-    background-color: white!important;
-    -webkit-appearance: none !important;
-    padding: 0px 10px;
-  }
-  .item-input-has-focus{
-    border: 2px solid color($colors, primary) !important;
-    
-  }
-  .item-block{
-    margin: 14px!important;
-    width: 90%;
-  }
 page-clients-tab,
 page-agents-tab,
 page-merchant-services-tab,
@@ -386,7 +359,7 @@ input.input-pin {
      & .label{ text-align: center; overflow: visible; contain: none; & img{ border-radius: 4px; } }
      & .input-wrapper{ overflow: visible; contain: none; }
      & .item-inner{ padding: 0px; overflow: visible; contain: none; border:none !important; }
-     & .profile-pic-camera{ width: 28px !important; height: 28px !important; margin: 0px; border-radius: 50%; background: #01758E url("../assets/imgs/profile-pic-camera.svg") no-repeat	 center top 6px / 14px 14px; position: absolute; right: calc(50% - 70px); bottom: 0px; }
+     & .profile-pic-camera{ width: 28px !important; height: 28px !important; margin: 0px; border-radius: 50%; background: #01758E url("../assets/imgs/profile-pic-camera.svg") no-repeat   center top 6px / 14px 14px; position: absolute; right: calc(50% - 70px); bottom: 0px; }
   }
   &.upload-files{ 
     margin: 8px 0px 32px 0px;
@@ -440,8 +413,5 @@ input.input-pin {
      & ion-note:last-child::before{ content: "+2"; height: 100%; width: 100%; border-radius: 2px; display: block; position: absolute; background-color: rgba( 0, 0, 0, 0.4); top: 0px; left: 0px; z-index: 1; font-size: 18px; line-height: 32px; font-family: "Raleway"; font-weight: 600; color: #fff; text-align: center;  }
    }
   }
-  .scroll-content {
-    padding-bottom: 0px !important;
- }
  // ion-select{ width: 100%; max-width: 100%; padding: 10px 16px 10px 32px; }
 }

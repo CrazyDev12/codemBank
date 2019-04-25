@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { Events, NavController, NavParams } from 'ionic-angular';
 
 import { ChangePassword } from './../change-password/change-password';
+import { ShowCustomerPage } from './../show-customer/show-customer';
+
 
 /**
  * Generated class for the Options page.
@@ -29,6 +31,11 @@ export class Options {
   openPassword() {
     this.navCtrl.push(ChangePassword);
   }
+
+  showCustomerDetails(){
+    this.navCtrl.push(ShowCustomerPage);
+  }
+  
   logOut() {
     this.userProvider.logOut();
   }

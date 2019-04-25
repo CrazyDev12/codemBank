@@ -5,9 +5,9 @@ import { OpenWalletAccountPage } from './../open-wallet-account/open-wallet-acco
 import { ApiProvider } from './../../providers/api/api';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Events, NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
+import { Events, NavController, NavParams, ViewController, ModalController, AlertController,Content } from 'ionic-angular';
 import { ForgotPinPage } from './../forgot-pin/forgot-pin';
-
+import { Keyboard } from '@ionic-native/keyboard';
 declare var cordova: any;
 
 /**
@@ -24,7 +24,13 @@ declare var cordova: any;
 export class Authenticate {
 
   login: string;
-  pass: string;
+  pass: string = '';
+  p1:string='';
+  p2:string='';
+  p3:string='';
+  p4:string='';
+  p5:string='';
+  p6:string='';
 
   authenticating = false;
 
@@ -39,52 +45,64 @@ export class Authenticate {
 
   test: boolean = true;
   cunt = 1;
-  idleState: string = 'not start';
+
   fetching: boolean = false;
+  textClass_: string;
 
+  @ViewChild('pass1') pass1;
+  @ViewChild('pass2') pass2;
+  @ViewChild('pass3') pass3;
+  @ViewChild('pass4') pass4;
+  @ViewChild('pass5') pass5;
+  @ViewChild('pass6') pass6;
+  @ViewChild(Content) contentArea: Content;
 
-  p1:string='';
-  p2:string='';
-  p3:string='';
-  p4:string='';
-  p5:string='';
-  p6:string='';
+  p1Color: any;
+  p2Color: any;
+  p3Color: any;
+  p4Color: any;
+  p5Color: any;
+  p6Color: any;
+  check:boolean=false;
 
-  textClass_:string;
-
-  @ViewChild('pass1') pass1:any;
-  @ViewChild('pass2') pass2:any;
-  @ViewChild('pass3') pass3:any;
-  @ViewChild('pass4') pass4:any;
-  @ViewChild('pass5') pass5:any;
-  @ViewChild('pass6') pass6:any;
-
-   p1Color:any;
-   p2Color:any;
-   p3Color:any;
-   p4Color:any;
-   p5Color:any;
-   p6Color:any;
-
-  constructor(private zone: NgZone, public storage: Storage, public events: Events, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController, public api: ApiProvider, public userProvider: UserProvider, public alertCtrl: AlertController) {
+  constructor(private keyboard: Keyboard,private zone: NgZone,public storage: Storage, public events: Events, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public viewCtrl: ViewController, public api: ApiProvider, public userProvider: UserProvider, public alertCtrl: AlertController) {
     this.test = api.isTest;
     storage.get('user_login').then(userStr => {
       if (userStr !== null) {
         this.user = JSON.parse(userStr);
       }
     });
-    //  this.getSplashImg();
   }
 
   ionViewDidLoad() {
     let advert = this.modalCtrl.create(AdvertPage);
     advert.present();
-  
+
+    advert.onDidDismiss(data => {
+      this.check=true;
+    });
+
     setTimeout(() => {
       this.vis = true;
     }, 1200);
   }
+  ngAfterViewChecked() {
+    if(this.user!==null && this.check)
+    {
+      this.keyboard.show();
+      if(this.keyboard.isVisible)
+      {
+        this.check=false;
+        this.pass1.setFocus();
+        this.contentArea.scrollToBottom();
+      }
+    }
+  }
 
+  // openKeybord(){
+  //   this.pass1.setFocus();
+  //   this.keyboard.show();
+  // }
   eventHandler($event) {
 
   }
@@ -106,8 +124,6 @@ export class Authenticate {
   }
 
   pinChange() {
-    // console.log("key : "+e);
-    // console.log("keycode  :"+e.keyCode);
     if (this.pass.length === 6) {
       this.authenticateUser();
     }
@@ -118,162 +134,219 @@ export class Authenticate {
       this.authenticate();
     }
   }
-
-  onKeyUp(e,t){
-   switch (t) {
-      case 1:
-        if(e.keyCode===8)
-        {
-          this.p1Color="textClass";
-          if(this.pass.length>0)
-          {
-            this.pass ='';
-          }
-        }
-        else{
-          this.p1Color="textClassChange";
+  // changeColor(num)
+  // {
+  //   let tot_length = this.pass.length;
+  //   if(num==="del")
+  //   {
+  //     switch (tot_length) {
+  //       case 1:
+  //         this.p1Color = "textClass";
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //       case 2:
+  //         this.p2Color = "textClass";
+  //         this.pass1.setFocus();
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //       case 3:
+  //         this.p3Color = "textClass";
+  //         this.pass2.setFocus();
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //       case 4:
+  //         this.p4Color = "textClass";
+  //         this.pass3.setFocus();
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //       case 5:
+  //         this.p5Color = "textClass";
+  //         this.pass4.setFocus();
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //       case 6:
+  //         this.p6Color = "textClass";
+  //         this.pass5.setFocus();
+  //         this.pass = this.pass.substring(0, this.pass.length-1);
+  //         break;
+  //     }
+  //   }
+  //   else{
+  //     switch (tot_length) {
+  //       case 0:
+  //         this.p1Color = "textClassChange";
+  //         this.pass2.setFocus();
+  //         this.pass += num;
+  //         break;
+  //       case 1:
+  //         this.p2Color = "textClassChange";
+  //         this.pass3.setFocus();
+  //         this.pass += num;
+  //         break;
+  //       case 2:
+  //         this.p3Color = "textClassChange";
+  //         this.pass4.setFocus();
+  //         this.pass += num;
+  //         break;
+  //       case 3:
+  //         this.p4Color = "textClassChange";
+  //         this.pass5.setFocus();
+  //         this.pass += num;
+  //         break;
+  //       case 4:
+  //         this.p5Color = "textClassChange";
+  //         this.pass6.setFocus();
+  //         this.pass += num;
+  //         break;
+  //       case 5:
+  //         this.p6Color = "textClassChange";
+  //         this.pass += num;
+  //         console.log(this.pass);
+  //         if(this.pass.length == 6){
+  //           this.authenticateUser();
+  //         }
+  //         break;
+  //     }
+  //   }
+    
+  // }
+  onKeyUp(event, t ) {
+    var key = event.keyCode || event.charCode;
+    console.log(key);
+    console.log(t);
+    console.log(event.key);
+      switch (t) {
+       
+        case 1:
+        if(key == 8 || key == 46){
+          this.p1Color = "textClass";
+          this.pass1.setFocus();
+          this.pass = this.pass.substring(0, this.pass.length-1);
+        } else{
+          this.p1Color = "textClassChange";
           this.pass2.setFocus();
           this.pass += this.p1;
         }
-        break;
-      case 2:
-        
-        if(e.keyCode===8)
-        {
-          this.p1Color="textClass";
+          console.log(this.pass);
+          break;
+        case 2:
+        if(key == 8 || key == 46){
+          this.p2Color = "";
           this.pass1.setFocus();
-          this.p1='';
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        else{
-          this.p2Color="textClassChange";
+          this.pass = this.pass.substring(0, this.pass.length-1);
+        } else{
+          this.p2Color = "textClassChange";
           this.pass3.setFocus();
           this.pass += this.p2;
         }
-        break;
-      case 3:
-        if(e.keyCode===8)
-        {
-          this.p2Color="textClass";
+          break;
+        case 3:
+        if(key == 8 || key == 46){
+          this.p3Color = "";
           this.pass2.setFocus();
-          this.p2='';
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        else{
-          this.p3Color="textClassChange";
+          this.pass = this.pass.substring(0, this.pass.length-1);
+        } else{
+          this.p3Color = "textClassChange";
           this.pass4.setFocus();
           this.pass += this.p3;
         }
-        break;
-      case 4:
-        
-        if(e.keyCode===8)
-        {
-          this.p3Color="textClass";
+          console.log(this.pass);
+          break;
+        case 4:
+        if(key == 8 || key == 46){
+          this.p4Color = "";
           this.pass3.setFocus();
-          this.p3='';
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        else{
-          this.p4Color="textClassChange";
+          this.pass = this.pass.substring(0, this.pass.length-1);
+        } else{
+          this.p4Color = "textClassChange";
           this.pass5.setFocus();
           this.pass += this.p4;
         }
-        break;
-      case 5:
-        
-        if(e.keyCode===8)
-        {
-          this.p4Color="textClass";
+          console.log(this.pass);
+          break;
+        case 5:
+        if(key == 8 || key == 46){
+          this.p5Color = "";
           this.pass4.setFocus();
-          this.p4='';
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
-          }
-        }
-        else{
-          this.p5Color="textClassChange";
+          this.pass = this.pass.substring(0, this.pass.length-1);
+        } else{
+          this.p5Color = "textClassChange";
           this.pass6.setFocus();
           this.pass += this.p5;
         }
-        break;
-      case 6:
-        
-        if(e.keyCode===8)
-        {
-          this.p5Color="textClass";
-          this.pass5.setFocus();
-          this.p5='';
-          if(this.pass.length>0)
-          {
-            this.pass =this.pass.slice(0,-1);
+          console.log(this.pass);
+          break;
+        case 6:
+          if(key == 8 || key == 46){
+            this.p6Color = "";
+            this.pass5.setFocus();
+            this.pass = this.pass.substring(0, this.pass.length-1);
+          } else{
+            this.p6Color = "textClassChange";
+            this.pass += this.p6;
           }
-        }
-        else{
-          this.p6Color="textClassChange";
-          this.pass += this.p6;
-          this.authenticate();
-        }
-        break;
-    }
-
+          if(this.pass.length == 6){
+            this.authenticateUser()
+          }
+          console.log(this.pass);
+          break;
+          default:
+            this.p1Color = this.p6Color = '';
+      }      
+      return false;
   }
+
 
   authenticate() {
     this.authenticating = true;
+    this.p1Color = "textClass";
 
-  this.p1Color="textClass";
-  this.p2Color="textClass";
-  this.p3Color="textClass";
-  this.p4Color="textClass";
-  this.p5Color="textClass";
-  this.p6Color="textClass";
+    this.p2Color = "textClass";
 
-    let data = JSON.stringify({ "pass": btoa(this.pass), "login": this.login, 'method': 'login' });
+    this.p3Color = "textClass";
+
+    this.p4Color = "textClass";
+
+    this.p5Color = "textClass";
+
+    this.p6Color = "textClass";
+    console.log(parseInt(this.pass));
+    let data = JSON.stringify({ pass: btoa(this.pass), "login": this.login });
     console.log(data);
     console.log(this.key);
-  //  this.api.getImei().then(imei => {
-  //    console.log(imei)
-      cordova.plugins.aesEnc(data, this.key).then((data_) => {
-        this.api.query(data_, null, 'login', false).then(data__ => {
-          this.authenticating = false;
-          let dt: any = data__;
-          if (dt.kbankResponse.retcode === 0) {
-            cordova.plugins.aesDec(dt.kbankResponse.reply, this.key).then((data___) => {
-
-              let coge: any = JSON.parse(data___);
-
-              coge.signedIn = true;
-
-              this.events.publish('user:auth', coge, Date.now());
-
-              this.navCtrl.popToRoot();
-            }).catch((err) => {
-              this.ret = 'Unknown error!';
-            });
-          } else {
-            this.ret = dt.kbankResponse.reply;
-          }
-
-        }).catch(error => {
-          this.authenticating = false;
-          this.ret = 'An error occurred!';
-        });
-      }).catch((err) => {
+    cordova.plugins.aesEnc(data, this.key).then((data_) => {
+      this.api.query(data_, null, 'login', false).then(data__ => {
         this.authenticating = false;
-        this.ret = 'Unknown error!';
-    //  });
-  })
+        let dt: any = data__;
+        if (dt.kbankResponse.retcode === 0) {
+          cordova.plugins.aesDec(dt.kbankResponse.reply, this.key).then((data___) => {
+
+            let coge: any = JSON.parse(data___);
+            console.log(coge);
+            this.storage.set('sesstime', coge.sesstime);
+            this.storage.set('login', coge.login);
+            this.storage.set('phone', coge.phone);
+            this.storage.set('customerid', coge.userid);
+            coge.signedIn = true;
+
+            this.events.publish('user:auth', coge, Date.now());
+           this.pass = '';
+            this.navCtrl.popToRoot();
+          }).catch((err) => {
+            this.ret = 'Unknown error!';
+          });
+        } else {
+          this.ret = dt.kbankResponse.reply;
+        }
+
+      }).catch(error => {
+        this.authenticating = false;
+        this.ret = 'An error occurred!';
+      });
+    }).catch((err) => {
+      this.authenticating = false;
+      this.ret = 'Unknown error!';
+    });
   }
 
   showRegister() {

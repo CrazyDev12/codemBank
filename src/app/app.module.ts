@@ -29,7 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
 import { ApiProvider } from '../providers/api/api';
 import { UserProvider } from '../providers/user/user';
@@ -63,11 +63,14 @@ import { ForgotPinPage } from '../pages/forgot-pin/forgot-pin';
 import { ChallengePage } from '../pages/challenge/challenge';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ClaimFromPage } from '../pages/claim-from/claim-from';
+import { Contacts} from '@ionic-native/contacts';
 import { SelectContactPage } from '../pages/select-contact/select-contact';
-import { SMS } from '@ionic-native/sms/ngx';
+// import { SMS } from '@ionic-native/sms/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { Keyboard } from '@ionic-native/keyboard';
+import { ShowCustomerPage } from '../pages/show-customer/show-customer';
+// import { Device } from '@ionic-native/device/ngx';
+// import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 @NgModule({
   declarations: [
@@ -114,14 +117,15 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ChallengePage,
     InboxPage,
     ClaimFromPage,
-    SelectContactPage
+    SelectContactPage,
+    ShowCustomerPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-   NgIdleKeepaliveModule
+   // NgIdleKeepaliveModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -168,7 +172,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ChallengePage,
     InboxPage,
     ClaimFromPage,
-    SelectContactPage
+    SelectContactPage,
+    ShowCustomerPage
   ],
   providers: [
     StatusBar,
@@ -187,9 +192,11 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     DatePicker,
     DateProvider,
     Market,
-    SMS,
-    Device,
+    // SMS,
+    // Device,
+    Keyboard,
     AndroidPermissions,
+    Contacts,
     ForceUpdateProvider
   ]
 })

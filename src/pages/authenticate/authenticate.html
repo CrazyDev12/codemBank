@@ -1,4 +1,4 @@
-<ion-content no-bounce>
+<ion-content no-bounce fullscreen="true" Slots="fixed">
   <div id="wrapping">
     <div id="wrapping-inner">
       <div id="main-logo">
@@ -20,106 +20,121 @@
       </div>
 
       <div *ngIf="vis">
+          <div *ngIf="user !== null">
+              <ion-item *ngIf="!authenticating" class="no-bg-color" no-lines
+                style="text-align:center;">
+                <h2>Continue as {{user.name}}</h2>
+                <p>{{user.phone}}</p>
+              </ion-item>
+    
+              <!-- <ion-input *ngIf="!authenticating" placeholder="PIN..." type="tel"
+                class="input-pin" clearInput [(ngModel)]="pass"
+                (ngModelChange)="pinChange()"></ion-input> -->
+              <!-- <ion-grid>
+                <ion-row>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel" class="input-pin textClass" clearInput #pass1 maxlength="1" [(ngModel)]="p1" (keyup)="onKeyUp($event,1)"  [(ngClass)]="p1Color" autofocus></ion-input>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel"
+                      class="input-pin textClass" clearInput #pass2 maxlength="1" [(ngModel)]="p2" (keyup)="onKeyUp($event,2)"  [(ngClass)]="p2Color"></ion-input>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel"
+                      class="input-pin textClass" clearInput #pass3 maxlength="1" [(ngModel)]="p3" (keyup)="onKeyUp($event,3)"  [(ngClass)]="p3Color"></ion-input>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel"
+                      class="input-pin textClass" clearInput #pass4 maxlength="1" [(ngModel)]="p4" (keyup)="onKeyUp($event,4)"  [(ngClass)]="p4Color"></ion-input>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel"
+                      class="input-pin textClass" clearInput #pass5 maxlength="1" [(ngModel)]="p5" (keyup)="onKeyUp($event,5)"  [(ngClass)]="p5Color"></ion-input>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-input *ngIf="!authenticating" type="tel"
+                      class="input-pin textClass" clearInput #pass6 maxlength="1" [(ngModel)]="p6" (keyup)="onKeyUp($event,6)"  [(ngClass)]="p6Color"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </ion-grid> -->
+    
+              <div class="form-action" *ngIf="!authenticating">
+                <button ion-button icon-left color="danger" block clear
+                  (click)="notUser()">
+                  Not {{user.name}}?
+                </button>
+              </div>
+            </div>
         <div *ngIf="user === null">
           <ion-input *ngIf="!authenticating" placeholder="Phone..." type="tel"
             clearInput [(ngModel)]="login"></ion-input>
           <ion-input *ngIf="!authenticating" placeholder="PIN..." type="tel"
             class="input-pin" clearInput [(ngModel)]="pass"
             (ngModelChange)="pinChange_()"></ion-input>
-           <!--  <ion-grid>
-            <ion-row>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel" class="input-pin textClass" clearInput #pass1 maxlength="1" [(ngModel)]="p1" (keyup)="onKeyUp($event,1)"  [(ngClass)]="p1Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass2 maxlength="1" [(ngModel)]="p2" (keyup)="onKeyUp($event,2)"  [(ngClass)]="p2Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass3 maxlength="1" [(ngModel)]="p3" (keyup)="onKeyUp($event,3)"  [(ngClass)]="p3Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass4 maxlength="1" [(ngModel)]="p4" (keyup)="onKeyUp($event,4)"  [(ngClass)]="p4Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass5 maxlength="1" [(ngModel)]="p5" (keyup)="onKeyUp($event,5)"  [(ngClass)]="p5Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass6 maxlength="1" [(ngModel)]="p6" (keyup)="onKeyUp($event,6)"  [(ngClass)]="p6Color"></ion-input>
-              </ion-col>
-            </ion-row>
-          </ion-grid> -->
         </div>
 
-        <div *ngIf="user !== null">
-          <ion-item *ngIf="!authenticating" class="no-bg-color" no-lines
-            style="text-align:center;">
-            <h2>Continue as {{user.name}}</h2>
-            <p>{{user.phone}}</p>
-          </ion-item>
-
-          <!-- <ion-input *ngIf="!authenticating" placeholder="PIN..." type="tel"
-            class="input-pin" clearInput [(ngModel)]="pass"
-            (ngModelChange)="pinChange()"></ion-input> -->
-          <ion-grid>
-            <ion-row>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel" class="input-pin textClass" clearInput #pass1 maxlength="1" [(ngModel)]="p1" (keyup)="onKeyUp($event,1)"  [(ngClass)]="p1Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass2 maxlength="1" [(ngModel)]="p2" (keyup)="onKeyUp($event,2)"  [(ngClass)]="p2Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass3 maxlength="1" [(ngModel)]="p3" (keyup)="onKeyUp($event,3)"  [(ngClass)]="p3Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass4 maxlength="1" [(ngModel)]="p4" (keyup)="onKeyUp($event,4)"  [(ngClass)]="p4Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass5 maxlength="1" [(ngModel)]="p5" (keyup)="onKeyUp($event,5)"  [(ngClass)]="p5Color"></ion-input>
-              </ion-col>
-              <ion-col col-2>
-                <ion-input *ngIf="!authenticating" type="tel"
-                  class="input-pin textClass" clearInput #pass6 maxlength="1" [(ngModel)]="p6" (keyup)="onKeyUp($event,6)"  [(ngClass)]="p6Color"></ion-input>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <div class="form-action" *ngIf="!authenticating">
-            <button ion-button icon-left color="danger" block clear
-              (click)="notUser()">
-              Not {{user.name}}?
-            </button>
-          </div>
+        <div *ngIf="!authenticating" class="fgt-btn"
+          (tap)="forgotPin()"> &nbsp;
         </div>
 
         <div *ngIf="ret.length> 0">
           <div class="loader-ret">{{ret}}</div>
         </div>
-
-        <div *ngIf="!authenticating" class="fgt-btn"
-          (tap)="forgotPin()">
-           Forgot PIN? 
-            Reset your <a>PIN</a>
+        <div *ngIf="user === null">
+          <div *ngIf="!authenticating" class="small-buttons-a" margin-left (tap)="register()" style="bottom: 0px;">
+            &nbsp;
+          </div>
+          <div *ngIf="!authenticating" class="small-buttons-b" margin-right (tap)="open()" style="bottom: 0px;">
+            &nbsp;
+          </div>
         </div>
-
-        <div *ngIf="!authenticating" class="small-buttons-a" margin-left
-          (tap)="register()">
-          &nbsp;
+        <div *ngIf="user != null">
+          <div *ngIf="!authenticating" class="small-buttons-a" margin-left (tap)="register()">
+            &nbsp;
+          </div>
+          <div *ngIf="!authenticating" class="small-buttons-b" margin-right (tap)="open()">
+            &nbsp;
+          </div>
         </div>
-        <div *ngIf="!authenticating" class="small-buttons-b" margin-right
-          (tap)="open()">
-          &nbsp;
-        </div>
+        
       </div>
     </div>
   </div>
 </ion-content>
+<ion-footer *ngIf="user !== null">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <ion-row>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel" class="input-pin textClass" clearInput #pass1 maxlength="1" [(ngModel)]="p1" (keyup)="onKeyUp($event,1)"  [(ngClass)]="p1Color"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel"
+              class="input-pin textClass" clearInput #pass2 maxlength="1" [(ngModel)]="p2" (keyup)="onKeyUp($event,2)"  [(ngClass)]="p2Color"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel"
+              class="input-pin textClass" clearInput #pass3 maxlength="1" [(ngModel)]="p3" (keyup)="onKeyUp($event,3)"  [(ngClass)]="p3Color"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel"
+              class="input-pin textClass" clearInput #pass4 maxlength="1" [(ngModel)]="p4" (keyup)="onKeyUp($event,4)"  [(ngClass)]="p4Color"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel"
+              class="input-pin textClass" clearInput #pass5 maxlength="1" [(ngModel)]="p5" (keyup)="onKeyUp($event,5)"  [(ngClass)]="p5Color"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input *ngIf="!authenticating" type="tel"
+              class="input-pin textClass" clearInput #pass6 maxlength="1" [(ngModel)]="p6" (keyup)="onKeyUp($event,6)"  [(ngClass)]="p6Color"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+    
+  </ion-grid>
+</ion-footer>
+
