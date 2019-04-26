@@ -29,92 +29,81 @@
 <ion-content>
 
   <ion-list *ngIf="success && data_.extras.service.movemoneyid !== '99'">
+    <ion-item-divider>
+        Source Account    
+    </ion-item-divider>
     <ion-item>
-      <p>
-        Source Account
-      </p>
-      <h2>
-        {{data_.extras.sourceAccount.account}}
-      </h2>
+      {{data_.extras.sourceAccount.account}}
     </ion-item>
 
+    <ion-item-divider>
+      Beneficiary Bank
+    </ion-item-divider>
     <ion-item>
-      <p>
-        Beneficiary Bank
-      </p>
-      <h2>
-        {{data_.extras.bank.bankname}}
-      </h2>
+      {{data_.extras.bank.bankname}}
     </ion-item>
 
+    <ion-item-divider>
+      Beneficiary Account
+    </ion-item-divider>
     <ion-item>
-      <p>
-        Beneficiary Account
-      </p>
-      <h2>
-        {{transa.acctno}}
-      </h2>
+      {{transa.acctno}}
     </ion-item>
 
+    <ion-item-divider>
+      Beneficiary Name
+    </ion-item-divider>
     <ion-item>
-      <p>
-        Beneficiary Name
-      </p>
-      <h2>
-        {{transa.accname}}
-      </h2>
+      {{transa.accname}}
     </ion-item>
 
+    <ion-item-divider *ngIf="data_.extras.beneficial.hasOwnProperty('phone') &&
+      data_.extras.beneficial.phone.length> 0">
+      Beneficiary Phone
+    </ion-item-divider>
     <ion-item *ngIf="data_.extras.beneficial.hasOwnProperty('phone') &&
       data_.extras.beneficial.phone.length> 0">
-      <p>
-        Beneficiary Phone
-      </p>
-      <h2>
         {{data_.extras.beneficial.phone}}
-      </h2>
     </ion-item>
 
+    <ion-item-divider *ngIf="data_.extras.beneficial.hasOwnProperty('email') &&
+      data_.extras.beneficial.email.length> 0">
+      Beneficiary Email
+    </ion-item-divider>
     <ion-item *ngIf="data_.extras.beneficial.hasOwnProperty('email') &&
       data_.extras.beneficial.email.length> 0">
-      <p>
-        Beneficiary Email
-      </p>
-      <h2>
-        {{data_.extras.beneficial.email}}
-      </h2>
+      {{data_.extras.beneficial.email}}
     </ion-item>
 
-    <ion-item>
-      <p>
-        {{transa.transaction.currdev !== transa.transaction.currdev1 &&
+    <ion-item-divider>
+      {{transa.transaction.currdev !== transa.transaction.currdev1 &&
         transa.transaction.taux !== '1' ? 'Amount To Debit' : 'Amount'}}
-      </p>
-      <h2>
-        {{(""+transa.transaction.amount1) | number}} {{currency1}}
-      </h2>
-    </ion-item>
-    <ion-item *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
-      && transa.transaction.taux !== '1'">
-      <p>Exchange Rate</p>
-      <h2>{{transa.transaction.taux}}</h2>
-    </ion-item>
-    <ion-item *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
-      && transa.transaction.taux !== '1'">
-      <p>Amount To Credit</p>
-      <h2>
-        {{(""+transa.transaction.amount2) | number}} {{currency2}}
-      </h2>
+    </ion-item-divider>
+    <ion-item>
+      {{(""+transa.transaction.amount1) | number}} {{currency1}}
     </ion-item>
 
+    
+    <ion-item-divider *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
+      && transa.transaction.taux !== '1'">Exchange Rate</ion-item-divider>
+    <ion-item *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
+      && transa.transaction.taux !== '1'">{{transa.transaction.taux}}
+    </ion-item>
+    
+    <ion-item-divider *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
+      && transa.transaction.taux !== '1'">Amount To Credit</ion-item-divider>
+    <ion-item *ngIf="transa.transaction.currdev !== transa.transaction.currdev1
+      && transa.transaction.taux !== '1'">
+      {{(""+transa.transaction.amount2) | number}} {{currency2}}
+    </ion-item>
+
+    <ion-item-divider no-lines *ngIf="(''+transa.transaction.description).toLowerCase()
+      !== 'false'">
+        Description
+    </ion-item-divider>
     <ion-item no-lines *ngIf="(''+transa.transaction.description).toLowerCase()
       !== 'false'">
-      <p>
-        Description
-      </p>
-      <h2>
         {{transa.transaction.description}}
-      </h2>
     </ion-item>
     <ion-item-divider *ngIf="!fetchingC && success && !successC &&
       (data_.extras.service.banktype === 'P' || data_.extras.service.banktype
@@ -136,7 +125,6 @@
       <ion-input placeholder="PIN..." type="tel" class="input-pin" clearInput
         [(ngModel)]="pass" (ngModelChange)="pinChange()"></ion-input>
     </ion-item>
-
   </ion-list>
 
   <ion-list *ngIf="success && data_.extras.service.movemoneyid === '99'">

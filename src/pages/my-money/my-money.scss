@@ -5,6 +5,12 @@ page-my-money {
   .accounts {
     margin-bottom: 0px;
   }
+  .dashboard-bg {
+      background-repeat: no-repeat;
+      background-image: url('../assets/img/dashboard.png');
+      background-position: 98% 89%;
+      background-size: 45% 98px;
+    }
   .grid-menu {
     .grid-menu-item {
       display: block;

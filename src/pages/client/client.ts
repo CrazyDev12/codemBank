@@ -14,6 +14,7 @@ import { Pay } from './../pay/pay';
  * more info on providers and Angular DI.
  */
 @Component({
+  selector: 'page-client',
   templateUrl: 'client.html'
 })
 export class Client {
